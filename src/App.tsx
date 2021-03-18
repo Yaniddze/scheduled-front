@@ -4,6 +4,7 @@ import {
   GlobalStyles,
   ReduxState,
   AppRoutes,
+  AppTheme,
 } from './appSetup';
 
 import {
@@ -14,14 +15,15 @@ import {
 export const App: FC = () => {
   return (
     <ReduxState>
-      <div id="app"> 
-        <Navbar />
-        <div>
-          <AppRoutes />
+      <AppTheme>
+        <div id="app"> 
+          <Navbar />
+          <div>
+            <AppRoutes />
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-      
+      </AppTheme>
       <GlobalStyles />
     </ReduxState>
   );
