@@ -2,11 +2,12 @@ import { FC } from "react";
 
 import {
   GlobalStyles,
+  ReduxState,
 } from './appSetup';
 
 export const App: FC = () => {
   return (
-    <>
+    <ReduxState>
       <div id="app"> 
         <div>
           Header
@@ -20,6 +21,6 @@ export const App: FC = () => {
       </div>
       
       <GlobalStyles />
-    </>
+    </ReduxState>
   );
 }
