@@ -8,6 +8,7 @@ import {
 
 import {
   Navbar,
+  Footer,
 } from './components';
 
 export const App: FC = () => {
@@ -18,9 +19,7 @@ export const App: FC = () => {
         <div>
           <AppRoutes />
         </div>
-        <div>
-          footer
-        </div>
+        <Footer />
       </div>
       
       <GlobalStyles />
