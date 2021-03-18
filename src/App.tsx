@@ -3,6 +3,7 @@ import { FC } from "react";
 import {
   GlobalStyles,
   ReduxState,
+  AppRoutes,
 } from './appSetup';
 
 export const App: FC = () => {
@@ -13,7 +14,7 @@ export const App: FC = () => {
           Header
         </div>
         <div>
-          main
+          <AppRoutes />
         </div>
         <div>
           footer
