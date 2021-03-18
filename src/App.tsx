@@ -6,13 +6,15 @@ import {
   AppRoutes,
 } from './appSetup';
 
+import {
+  Navbar,
+} from './components';
+
 export const App: FC = () => {
   return (
     <ReduxState>
       <div id="app"> 
-        <div>
-          Header
-        </div>
+        <Navbar />
         <div>
           <AppRoutes />
         </div>
