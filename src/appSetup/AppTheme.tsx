@@ -1,15 +1,20 @@
 // Core
-import React, {
+import {
     FC,
     ReactElement,
     useState,
 } from 'react';
 import Cookies from 'js-cookie';
-import
-    styled, {
+import styled, {
     DefaultTheme,
     ThemeProvider,
+    useTheme,
 } from 'styled-components';
+
+import {
+    createMuiTheme,
+    ThemeProvider as MThemeProvider,
+} from '@material-ui/core/styles';
 
 // Themes
 import {
@@ -56,16 +61,44 @@ export const AppTheme: FC<PropTypes> = ({ children }: PropTypes) => {
 
 return (
         <>
-        <ThemeProvider theme={currentTheme}>
-            <InputWrapper>
-                <ToogleSwitch
-                    initValue={!isGreenCooked}
-                    handleChange={handleChange}
-                />
-            </InputWrapper>
+            <ThemeProvider theme={currentTheme}>
+                <MUiTheme>
+                    <InputWrapper>
+                        <ToogleSwitch
+                            initValue={!isGreenCooked}
+                            handleChange={handleChange}
+                        />
+                    </InputWrapper>
 
-            {children}
-        </ThemeProvider>
+                    {children}
+                </MUiTheme>
+            </ThemeProvider>
         </>
     );
 };
+
+type MUiThemeProps = {
+    children: JSX.Element[],
+}
+
+const MUiTheme: FC<MUiThemeProps> = ({
+    children,
+}: MUiThemeProps) => {
+    const currentTheme = useTheme();
+    const adaptedTheme = createMuiTheme({
+        palette: {
+            primary: {
+                main: currentTheme.colors.main,
+            },
+            secondary: {
+                main: currentTheme.colors.secondary,
+            }
+        }
+    });
+
+    return (
+        <MThemeProvider theme={adaptedTheme}>
+            {children}
+        </MThemeProvider>
+    )
+}
