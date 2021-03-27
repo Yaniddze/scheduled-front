@@ -88,10 +88,12 @@ const MUiTheme: FC<MUiThemeProps> = ({
     const adaptedTheme = createMuiTheme({
         palette: {
             primary: {
-                main: currentTheme.colors.main,
+                main: currentTheme.colors.main.color,
+                contrastText: currentTheme.colors.main.contrast
             },
             secondary: {
-                main: currentTheme.colors.secondary,
+                main: currentTheme.colors.secondary.color,
+                contrastText: currentTheme.colors.secondary.contrast
             }
         }
     });

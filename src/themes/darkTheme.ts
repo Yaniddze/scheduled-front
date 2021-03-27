@@ -2,13 +2,27 @@ import { DefaultTheme } from 'styled-components';
 
 export const darkTheme: DefaultTheme = {
   colors: {
-    main: '#212529',
-    secondary: '#343a40',
-    dim: '#495057',
-    dark: '#ced4da',
-    calcDarkInRgba: ((opacity: number): string => `rgba(206,212,218,${opacity})`),
-    error: 'green',
-    linkColor: 'black',
+    main: {
+      color: '#2c2533',
+      contrast: 'white'
+    },
+    secondary: {
+      color: '#32075e',
+      contrast: 'white'
+    },
+    background: {
+      color: '#2c2533',
+      contrast: 'white'
+    },
+    calcDarkInRgba: ((opacity: number): string => `rgba(64,147,0,${opacity})`),
+    error: {
+      color: 'red',
+      contrast: 'black'
+    },
+    linkColor: {
+      color: 'black',
+      contrast: 'black'
+    },
   },
 
   font: {

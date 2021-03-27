@@ -1,15 +1,19 @@
 import 'styled-components';
 
+type Color = {
+  color: string
+  contrast: string
+}
+
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
-      main: string;
-      secondary: string;
-      dim: string;
-      dark: string;
+      main: Color;
+      secondary: Color;
+      background: Color;
       calcDarkInRgba: (opacity: number) => string;
-      error: string;
-      linkColor: string;
+      error: Color;
+      linkColor: Color;
     };
 
     font: {
