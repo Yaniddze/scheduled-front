@@ -8,7 +8,7 @@ type ContainerProps = {
 export const Container: FC<ContainerProps> = ({
     children
 }: ContainerProps) => (
-    <MuiContainer maxWidth="xl">
+    <MuiContainer maxWidth="lg">
         {children}
     </MuiContainer>
 )

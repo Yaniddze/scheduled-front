@@ -10,6 +10,7 @@ import {
 import {
   Navbar,
   Footer,
+  Container,
 } from './components';
 
 export const App: FC = () => {
@@ -19,7 +20,9 @@ export const App: FC = () => {
         <div id="app"> 
           <Navbar />
           <div>
-            <AppRoutes />
+            <Container>
+              <AppRoutes />
+            </Container>
           </div>
           <Footer />
         </div>

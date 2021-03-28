@@ -1,6 +1,8 @@
 import { FC } from "react";
 import styled from 'styled-components';
 
+import { Container } from '../container';
+
 type FooterTypes = {
     children?: never
 }
@@ -12,6 +14,10 @@ const Wrapper = styled.div`
 
 export const Footer: FC<FooterTypes> = () => (
     <Wrapper>
-        Footer
+        <Container>
+            <div>
+                Footer
+            </div>
+        </Container>
     </Wrapper>
 )
