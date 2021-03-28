@@ -12,16 +12,16 @@ export const darkTheme: DefaultTheme = {
     },
     background: {
       header: {
-        color: 'red',
-        contrast: 'black'
+        color: '#383b40',
+        contrast: '#FFF'
       },
       footer: {
-        color: '#87948e',
-        contrast: 'black'
+        color: '#010101',
+        contrast: '#FFF'
       },
       main: {
-        color: '#bed1c8',
-        contrast: 'black'
+        color: '#27292D',
+        contrast: '#FFF'
       },
     },
     calcDarkInRgba: ((opacity: number): string => `rgba(64,147,0,${opacity})`),

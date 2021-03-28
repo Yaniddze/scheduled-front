@@ -11,7 +11,7 @@ import {
 import {
   Navbar,
   Footer,
-  Container,
+  Main,
 } from './components';
 
 export const App: FC = () => {
@@ -21,11 +21,9 @@ export const App: FC = () => {
         <AppTheme>
           <div id="app"> 
             <Navbar />
-            <div>
-              <Container>
-                <AppRoutes />
-              </Container>
-            </div>
+            <Main>
+              <AppRoutes />
+            </Main>
             <Footer />
           </div>
         </AppTheme>
