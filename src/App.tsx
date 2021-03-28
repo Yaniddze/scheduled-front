@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { BrowserRouter } from 'react-router-dom';
 
 import {
   GlobalStyles,
@@ -15,19 +16,21 @@ import {
 
 export const App: FC = () => {
   return (
-    <ReduxState>
-      <AppTheme>
-        <div id="app"> 
-          <Navbar />
-          <div>
-            <Container>
-              <AppRoutes />
-            </Container>
+    <BrowserRouter>
+      <ReduxState>
+        <AppTheme>
+          <div id="app"> 
+            <Navbar />
+            <div>
+              <Container>
+                <AppRoutes />
+              </Container>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </AppTheme>
-      <GlobalStyles />
-    </ReduxState>
+        </AppTheme>
+        <GlobalStyles />
+      </ReduxState>
+    </BrowserRouter>
   );
 }

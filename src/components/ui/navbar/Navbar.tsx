@@ -1,5 +1,7 @@
 import { FC } from "react";
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
+
 import { Container } from '../container';
 
 type NavbarProps = {
@@ -11,12 +13,16 @@ const Wrapper = styled.div`
     color: ${(props) => props.theme.colors.background.header.contrast};
 `;
 
-export const Navbar: FC<NavbarProps> = () => (
-    <Wrapper>
-        <Container>
-            <div>
-                Nav bar
-            </div>
-        </Container>
-    </Wrapper>
-);
+export const Navbar: FC<NavbarProps> = () => {
+    const location = useLocation();
+    
+    return (
+        <Wrapper>
+            <Container>
+                <div>
+                    Nav bar
+                </div>
+            </Container>
+        </Wrapper>
+    );
+}
