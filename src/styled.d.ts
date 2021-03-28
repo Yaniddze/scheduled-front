@@ -8,20 +8,16 @@ type Color = {
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
-      main: Color;
-      secondary: Color;
-      background: Color;
-      calcDarkInRgba: (opacity: number) => string;
-      error: Color;
-      linkColor: Color;
-    };
-
-    font: {
-      normalSize: string;
-      smallerSize: string;
-      btnFontSize: string;
-
-      btnFontColor: string;
+      main: Color
+      secondary: Color
+      background: {
+        header: Color
+        footer: Color
+        main: Color
+      }
+      calcDarkInRgba: (opacity: number) => string
+      error: Color
+      linkColor: Color
     };
   }
 }

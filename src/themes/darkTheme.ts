@@ -3,16 +3,26 @@ import { DefaultTheme } from 'styled-components';
 export const darkTheme: DefaultTheme = {
   colors: {
     main: {
-      color: '#2c2533',
-      contrast: 'white'
+      color: '#62E200',
+      contrast: 'black'
     },
     secondary: {
-      color: '#32075e',
-      contrast: 'white'
+      color: '#62AA2A',
+      contrast: 'black'
     },
     background: {
-      color: '#2c2533',
-      contrast: 'white'
+      header: {
+        color: 'red',
+        contrast: 'black'
+      },
+      footer: {
+        color: '#87948e',
+        contrast: 'black'
+      },
+      main: {
+        color: '#bed1c8',
+        contrast: 'black'
+      },
     },
     calcDarkInRgba: ((opacity: number): string => `rgba(64,147,0,${opacity})`),
     error: {
@@ -23,13 +33,5 @@ export const darkTheme: DefaultTheme = {
       color: 'black',
       contrast: 'black'
     },
-  },
-
-  font: {
-    btnFontSize: '15px',
-    smallerSize: '13px',
-    normalSize: '16px',
-
-    btnFontColor: 'white',
-  },
+  }
 };

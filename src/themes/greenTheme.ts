@@ -11,8 +11,18 @@ export const greenTheme: DefaultTheme = {
       contrast: 'black'
     },
     background: {
-      color: '#bed1c8',
-      contrast: 'black'
+      header: {
+        color: '#bed1c8',
+        contrast: 'black'
+      },
+      footer: {
+        color: '#87948e',
+        contrast: 'black'
+      },
+      main: {
+        color: '#bed1c8',
+        contrast: 'black'
+      },
     },
     calcDarkInRgba: ((opacity: number): string => `rgba(64,147,0,${opacity})`),
     error: {
@@ -23,13 +33,5 @@ export const greenTheme: DefaultTheme = {
       color: 'black',
       contrast: 'black'
     },
-  },
-
-  font: {
-    btnFontSize: '15px',
-    smallerSize: '13px',
-    normalSize: '16px',
-
-    btnFontColor: 'black',
   },
 };
