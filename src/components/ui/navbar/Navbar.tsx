@@ -4,6 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 import {
     Face,
     AccountCircle,
+    MenuBook,
 } from '@material-ui/icons';
 
 import { Container } from '../container';
@@ -30,7 +31,7 @@ const NavbarWrapper = styled.div`
 
     > div {
         display: flex;
-        justify-content: space-between;
+        gap: 0 15px;
         width: 100%;
     }
 `;
@@ -48,7 +49,15 @@ const LinkWrapper = styled.div`
             margin: auto 0;
         }
     }
-`
+`;
+
+const LogoWrapper = styled.div`
+    width: 80px;
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+`;
 
 export const Navbar: FC<NavbarProps> = () => {
     const location = useLocation();
@@ -58,6 +67,9 @@ export const Navbar: FC<NavbarProps> = () => {
             <Container>
                 <NavbarWrapper>
                     <div>
+                        <LogoWrapper>
+                            <MenuBook />
+                        </LogoWrapper>
 
                         <Route
                             currentRoute={location.pathname}
