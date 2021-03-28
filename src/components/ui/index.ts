@@ -4,3 +4,4 @@ export * from './switch';
 export * from './button';
 export * from './container';
 export * from './main';
+export * from './loginForm';
