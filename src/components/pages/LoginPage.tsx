@@ -12,5 +12,5 @@ export const LoginPage: FC = () => {
 
     return (
         <LoginForm onSubmit={handleSubmit} />
-    )
+    );
 }

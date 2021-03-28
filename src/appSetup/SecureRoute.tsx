@@ -1,22 +1,18 @@
-import { FC, ReactElement } from "react";
-import { useSelector } from 'react-redux';
-import { Redirect, Route } from "react-router";
-import { RootState } from "../reduxStore";
+import { FC } from "react";
+import { Redirect } from "react-router-dom";
+import { useAccessToken } from "../hooks";
 
-type SecurePageProps = {
-    children: ReactElement
-    to: string
+type Props = {
+  children: JSX.Element,
+  validation: (token: string) => boolean,
+  redirect?: string,
 }
 
-export const SecureRoute: FC<SecurePageProps> = ({
-    children, 
-    to,
-}: SecurePageProps) => {
-    const accessToken = useSelector((x: RootState) => x.token);
+export const Secure: FC<Props> = ({ children, validation, redirect }: Props) => {
+  const { token } = useAccessToken();
+  const validationResult = validation(token);
 
-    return (
-        <Route path={to}>
-            {accessToken === '' ? <Redirect to="/login" /> : children}
-        </Route>
-    );
-}   
+  const validWay = validationResult ? children : <Redirect to={String(redirect)} />
+
+  return validWay;
+}

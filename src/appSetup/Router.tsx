@@ -6,7 +6,7 @@ import {
 } from '../components';
 
 import {
-    SecureRoute,
+    Secure,
 } from './SecureRoute';
 
 type AppRoutesPropTypes = {
@@ -15,16 +15,40 @@ type AppRoutesPropTypes = {
 
 export const AppRoutes: FC<AppRoutesPropTypes> = () => (
     <Switch>
-        <SecureRoute to="/">
-            <div>
-                123123
-            </div>
-        </SecureRoute>
 
-        <Route path="/login">
-            <LoginPage />
+      <Route path="/" exact>
+          <ApplicationSecure>
+              <div>
+                  123123
+              </div>
+          </ApplicationSecure>
+      </Route>
+
+        <Route path="/login" exact>
+            <LoginSecure>
+                <LoginPage />
+            </LoginSecure>
         </Route>
 
         <Redirect to="/" />
     </Switch>
-)
+);
+
+export const appValidation = (tokenToCheck: string) => tokenToCheck.length > 0;
+export const loginValidation = (tokenToCheck: string) => tokenToCheck.length === 0;
+
+type SecureProps = {
+  children: JSX.Element,
+}
+
+export const ApplicationSecure: FC<SecureProps> = (props) => (
+  <Secure validation={appValidation} redirect="/login">
+    {props.children}
+  </Secure>
+);
+
+export const LoginSecure: FC<SecureProps> = (props) => (
+  <Secure validation={loginValidation} redirect="/">
+    {props.children}
+  </Secure>
+);
