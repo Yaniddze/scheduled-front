@@ -1,6 +1,6 @@
 import { DefaultTheme } from 'styled-components';
 
-export const greenTheme: DefaultTheme = {
+export const lightTheme: DefaultTheme = {
   colors: {
     main: {
       color: '#62E200',
@@ -12,16 +12,16 @@ export const greenTheme: DefaultTheme = {
     },
     background: {
       header: {
-        color: '#bed1c8',
-        contrast: 'black'
+        color: '#e1e3e6',
+        contrast: '#000'
       },
       footer: {
-        color: '#87948e',
-        contrast: 'black'
+        color: '#5c5c63',
+        contrast: '#FFF'
       },
       main: {
-        color: '#bed1c8',
-        contrast: 'black'
+        color: '#FFF',
+        contrast: '#000'
       },
     },
     calcDarkInRgba: ((opacity: number): string => `rgba(64,147,0,${opacity})`),

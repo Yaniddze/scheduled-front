@@ -18,7 +18,7 @@ import {
 
 // Themes
 import {
-    greenTheme,
+    lightTheme,
     darkTheme,
 } from '../themes';
 
@@ -41,21 +41,21 @@ const cookieName = 'Schedule.Theme';
 
 const cookedTheme = Cookies.get(cookieName);
 
-const isGreenCooked = cookedTheme === 'green';
+const lightCooked = cookedTheme === 'light';
 
 export const AppTheme: FC<PropTypes> = ({ children }: PropTypes) => {
     const [currentTheme, setCurrentTheme] = useState<DefaultTheme>(
-        isGreenCooked ? greenTheme : darkTheme,
+        lightCooked ? lightTheme : darkTheme,
     );
 
     const handleChange = (): void => {
         setCurrentTheme((current) => {
-        if (current === greenTheme) {
+        if (current === lightTheme) {
             Cookies.set(cookieName, 'dark');
             return darkTheme;
         }
-        Cookies.set(cookieName, 'green');
-        return greenTheme;
+        Cookies.set(cookieName, 'light');
+        return lightTheme;
         });
     };
 
@@ -65,7 +65,7 @@ return (
                 <MUiTheme>
                     <InputWrapper>
                         <ToogleSwitch
-                            initValue={!isGreenCooked}
+                            initValue={!lightCooked}
                             handleChange={handleChange}
                         />
                     </InputWrapper>
