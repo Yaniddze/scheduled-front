@@ -26,4 +26,29 @@ export const GlobalStyles = createGlobalStyle`
     #app:last-child {
         grid-row-start: 3;
     }
+
+
+    /* prepared animations*/
+    .fade-enter{
+    opacity: 0;
+    transform: translateX(-100%);
+    }
+    .fade-exit{
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .fade-enter-active{
+        opacity: 1;
+        opacity: 1;
+        transform: translateX(0);
+    }
+    .fade-exit-active{
+        opacity: 0;
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    .fade-enter-active,
+    .fade-exit-active{
+        transition: opacity 0.3s, transform 0.3s;
+    }
 `;
