@@ -2,36 +2,62 @@ import { FC } from "react";
 import { Switch, Redirect, Route } from 'react-router-dom';
 
 import {
-    LoginPage,
+  EnterGroupPage,
+  LoginPage, SchedulePage, SheduleDayPage
 } from '../components';
+import { GroupsPage } from "../components/pages/Schedule/GroupsPage";
 
 import {
-    Secure,
+  Secure,
 } from './SecureRoute';
 
 type AppRoutesPropTypes = {
-    children?: never;
+  children?: never;
 }
 
 export const AppRoutes: FC<AppRoutesPropTypes> = () => (
-    <Switch>
+  <Switch>
 
-      <Route path="/" exact>
-          <ApplicationSecure>
-              <div>
-                  123123
-              </div>
-          </ApplicationSecure>
-      </Route>
+    <Route path="/" exact>
+      <ApplicationSecure>
+        <div>
+          123123
+        </div>
+      </ApplicationSecure>
+    </Route>
 
-        <Route path="/login" exact>
-            <LoginSecure>
-                <LoginPage />
-            </LoginSecure>
-        </Route>
+    <Route path="/schedule" exact>
+      {/* <LoginSecure> */}
+        <GroupsPage />
+      {/* </LoginSecure> */}
+    </Route>
 
-        <Redirect to="/" />
-    </Switch>
+    <Route path="/schedule/add" exact>
+      {/* <LoginSecure> */}
+        <EnterGroupPage />
+      {/* </LoginSecure> */}
+    </Route>
+
+    <Route path="/schedule/:id" exact>
+      {/* <LoginSecure> */}
+        <SchedulePage />
+      {/* </LoginSecure> */}
+    </Route>
+
+    <Route path="/schedule/:id/:day" exact>
+      {/* <LoginSecure> */}
+        <SheduleDayPage />
+      {/* </LoginSecure> */}
+    </Route>
+
+    <Route path="/login" exact>
+      <LoginSecure>
+        <LoginPage />
+      </LoginSecure>
+    </Route>
+
+    <Redirect to="/" />
+  </Switch>
 );
 
 export const appValidation = (tokenToCheck: string) => tokenToCheck.length > 0;

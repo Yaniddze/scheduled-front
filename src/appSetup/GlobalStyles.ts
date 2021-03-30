@@ -27,6 +27,14 @@ export const GlobalStyles = createGlobalStyle`
         grid-row-start: 3;
     }
 
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+    a:visited {
+        color: currentColor;
+    }
+
 
     /* prepared animations*/
     .fade-enter{
