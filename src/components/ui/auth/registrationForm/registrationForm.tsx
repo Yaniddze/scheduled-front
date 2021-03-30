@@ -49,6 +49,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       <InputGroup>
         <TextField
           name="password"
+          type="password"
           inputRef={register({
             required: {
               value: true,
@@ -63,6 +64,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
       <InputGroup>
         <TextField
           name="rpassword"
+          type="password"
           inputRef={register({
             required: {
               value: true,

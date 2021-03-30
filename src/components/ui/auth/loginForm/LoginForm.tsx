@@ -53,6 +53,7 @@ export const LoginForm: FC<LoginFormProps> = ({
                 <InputGroup>
                     <TextField
                         name="password"
+                        type="password"
                         inputRef={register({
                             required: {
                                 value: true,
