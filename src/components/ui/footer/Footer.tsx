@@ -29,11 +29,11 @@ export const Footer: FC<FooterTypes> = () => (
                     <Box textAlign="center" mt={2} mb={2}>© Зиневич Ян 2021</Box>
 
                     <FooterLinks>
-                        <a href="/"><GitHubIcon /></a>
-                        <a href="/"><YouTubeIcon /></a>
-                        <a href="/"><MailIcon /></a>
-                        <a href="/"><TwitterIcon /></a>
-                        <a href="/"><TelegramIcon /></a>
+                        <a href="https://github.com/Yaniddze"><GitHubIcon /></a>
+                        <a href="https://www.youtube.com/channel/UCSBSAK98S9VbQpEiZAVU8Bg"><YouTubeIcon /></a>
+                        <a href="mailto:yanrus09@gmail.com"><MailIcon /></a>
+                        <a href="https://twitter.com/Yaniddze"><TwitterIcon /></a>
+                        <a href="https://t.me/Yaniddze"><TelegramIcon /></a>
                     </FooterLinks>
                 </div>
             </Box>
