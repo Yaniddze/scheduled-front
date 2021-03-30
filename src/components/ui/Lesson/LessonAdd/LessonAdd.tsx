@@ -13,14 +13,16 @@ import { Box, Button } from '@material-ui/core';
 type LessonAddProps = {
   lessons: LessonAutoCompleate[]
   onAdd: (time: Date, lesson: LessonAutoCompleate) => void
+  startDate: Date
 }
 
 export const LessonAdd: React.FC<LessonAddProps> = ({
   lessons,
-  onAdd
+  onAdd,
+  startDate,
 }) => {
   const [editing, setEditing] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(startDate);
   const [selectedLesson, setSelectedLesson] = useState<LessonAutoCompleate>();
 
 
@@ -28,7 +30,7 @@ export const LessonAdd: React.FC<LessonAddProps> = ({
     if (!selectedLesson) return;
     onAdd(selectedDate, selectedLesson);
 
-    setSelectedDate(() => new Date());
+    setSelectedDate(() => startDate);
     setSelectedLesson(() => undefined);
     setEditing(() => false);
   }
