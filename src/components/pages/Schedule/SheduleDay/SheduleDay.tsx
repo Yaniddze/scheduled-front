@@ -30,7 +30,7 @@ export const SheduleDayPage: React.FC<SheduleDayProps> = (props) => {
   const id = pageParms.id;
   const day = pageParms.day;
 
-  const isOwner = false;
+  const isOwner = true;
   const [lessons, setLessons] = useState<Lesson[]>(lessonsList);
 
   const deleteHandle = (lessonId: number) => {
