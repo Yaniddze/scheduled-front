@@ -4,8 +4,6 @@ import { useForm } from 'react-hook-form';
 import { FormCard } from '../../form';
 import { InputGroup } from '../../form/styled';
 
-
-
 export type RegistrationFormType = {
   login: string
   password: string
@@ -15,15 +13,17 @@ export type RegistrationFormType = {
 type RegistrationFormProps = {
   children?: never
   onSubmit: (data: RegistrationFormType) => void
+  error: string
 }
 
 export const RegistrationForm: React.FC<RegistrationFormProps> = ({
-  onSubmit
+  onSubmit, error
 }) => {
   const {
     register,
     handleSubmit,
-    errors
+    errors,
+    getValues,
   } = useForm<RegistrationFormType>();
 
   return (
@@ -32,6 +32,10 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
         Регистрация
       </Typography>
 
+      <div style={{ color: 'red' }}>
+          {error}
+      </div>
+
       <InputGroup>
         <TextField
           name="login"
@@ -39,10 +43,20 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             required: {
               value: true,
               message: 'Это поле обязательно'
-            }
+            },
+            minLength: {
+              value: 4,
+              message: 'Минимальная длинна поля - 4 символа'
+            },
+            maxLength: {
+              value: 20,
+              message: 'Максимальная длинна поля - 20 символов'
+            },
           })}
           label="Логин"
           fullWidth
+          error={!!errors.login}
+          helperText={errors.login?.message}
         />
       </InputGroup>
 
@@ -54,25 +68,38 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({
             required: {
               value: true,
               message: 'Это поле обязательно'
-            }
+            },
+            minLength: {
+              value: 4,
+              message: 'Минимальная длинна поля - 4 символа'
+            },
+            maxLength: {
+              value: 20,
+              message: 'Максимальная длинна поля - 20 символов'
+            },
           })}
           label="пароль"
           fullWidth
+          error={!!errors.password}
+          helperText={errors.password?.message}
         />
       </InputGroup>
 
       <InputGroup>
         <TextField
-          name="rpassword"
+          name="repeatPassword"
           type="password"
           inputRef={register({
             required: {
               value: true,
               message: 'Это поле обязательно'
-            }
+            },
+            validate: (pass: string) => getValues().password === pass ? true : 'Пароли должны совпадать',
           })}
           label="Повторите пароль"
           fullWidth
+          error={!!errors.repeatPassword}
+          helperText={errors.repeatPassword?.message}
         />
       </InputGroup>
 

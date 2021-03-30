@@ -18,10 +18,11 @@ export type LoginFormType = {
 type LoginFormProps = {
     children?: never
     onSubmit: (data: LoginFormType) => void
+    error: string
 }
 
 export const LoginForm: FC<LoginFormProps> = ({
-    onSubmit,
+    onSubmit, error
 }: LoginFormProps) => {
     const {
         register,
@@ -36,6 +37,9 @@ export const LoginForm: FC<LoginFormProps> = ({
             </Typography>
 
             <div>
+                <div style={{ color: 'red' }}>
+                    {error}
+                </div>
                 <InputGroup>
                     <TextField
                         name="login"
@@ -47,6 +51,8 @@ export const LoginForm: FC<LoginFormProps> = ({
                         })}
                         label="Логин"
                         fullWidth
+                        error={!!errors.login}
+                        helperText={errors.login?.message}
                     />
                 </InputGroup>
 
@@ -62,6 +68,8 @@ export const LoginForm: FC<LoginFormProps> = ({
                         })}
                         label="пароль"
                         fullWidth
+                        error={!!errors.password}
+                        helperText={errors.password?.message}
                     />
                 </InputGroup>
             </div>
