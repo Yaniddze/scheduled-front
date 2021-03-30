@@ -69,7 +69,14 @@ export const LoginPage: FC = () => {
         setRegisterError('');
     }
 
-    const formToggleHandle = (_: React.ChangeEvent<HTMLInputElement>, isLogin: boolean) => setIsLogin(isLogin);
+    const formToggleHandle = (_: React.ChangeEvent<HTMLInputElement>, isLogin: boolean) => {
+        setIsLogin(isLogin);
+
+        setRegisterError('');
+
+        setLoginError('');
+
+    };
 
     return (
         <AuthPageContent>
