@@ -2,9 +2,11 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
 import { AccessTokenReducer } from './accessToken';
+import { TempDateReducer } from './tempDate';
 
 const rootReducer = combineReducers({
     token: AccessTokenReducer,
+    temp: TempDateReducer,
 });
 
 const composeEnhancers =

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
 import { Lesson, LessonAutoCompleate } from '../../../../models/Lesson';
 import { LessonEditableCard } from '../../../ui';
 import { LessonField } from './styled';
 import { LessonAdd } from '../../../ui/Lesson/LessonAdd';
+import { RootState } from '../../../../reduxStore';
 
 
 
@@ -28,7 +30,12 @@ const Lessons: LessonAutoCompleate[] = [
 export const SheduleDayPage: React.FC<SheduleDayProps> = (props) => {
   const pageParms = useParams<SheduleDayParams>();
   const id = pageParms.id;
+
+  const tempDate = useSelector((store: RootState) => store.temp);
+  
   const day = pageParms.day;
+  
+  console.log(day === 'temp');
 
   const isOwner = true;
   const [lessons, setLessons] = useState<Lesson[]>(lessonsList);
