@@ -32,13 +32,14 @@ export const SheduleDayPage: React.FC<SheduleDayProps> = (props) => {
   const id = pageParms.id;
 
   const tempDate = useSelector((store: RootState) => store.temp);
+  const group = useSelector((store: RootState) => store.group.find(x => x.id === Number(id)));
   
-  const day = pageParms.day;
-  
-  console.log(day === 'temp');
+  const day = pageParms.day; // temp when data is temp
 
-  const isOwner = true;
-  const [lessons, setLessons] = useState<Lesson[]>(lessonsList);
+  const isOwner = group?.owner || false;
+  const task = group?.tasks.find(x => x.date === day);
+
+  const [lessons, setLessons] = useState<Lesson[]>(task?.subjects.map(x => new Lesson(x.subjectName, x.teacher, new Date(task.date), x.durationInMinutes, x.id)) || []);
 
   const deleteHandle = (lessonId: number) => {
     setLessons(lessons.filter((lesson) => lesson.id != lessonId));
@@ -47,7 +48,6 @@ export const SheduleDayPage: React.FC<SheduleDayProps> = (props) => {
   const addHandle = (time: Date, lesson: LessonAutoCompleate) => {
     setLessons(lessons.concat(new Lesson(lesson.name, 'From server', time, 90, lessons.length + 1)));
   }
-
 
   return (
     <LessonField>

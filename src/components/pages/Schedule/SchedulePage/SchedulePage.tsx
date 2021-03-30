@@ -15,6 +15,7 @@ import { Button } from '../../../ui';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 
 import { SetTemp } from '../../../../reduxStore/tempDate';
+import { AddGroup } from '../../../../reduxStore/groups';
 
 // type
 type SchedulePageParams = {
@@ -44,6 +45,8 @@ export const SchedulePage: React.FC<SchedulePageProps> = (props) => {
   useEffect(() => {
     if (success) {
       setGroup(detailed.state.answer.data!);
+
+      dispatch(AddGroup(detailed.state.answer.data!));
 
       detailed.reload();
     }
@@ -78,7 +81,7 @@ export const SchedulePage: React.FC<SchedulePageProps> = (props) => {
                 onClick={() => {
                   if (selectedDate) {
                     dispatch(SetTemp(selectedDate));
-                    history.push('/schedule/0/temp')
+                    history.push(`/schedule/${id}/temp`);
                   }
                 }}
               >
