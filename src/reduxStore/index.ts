@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 
 import { AccessTokenReducer } from './accessToken';
 import { TempDateReducer } from './tempDate';
+import { GroupsReducer } from './groups';
 
 const rootReducer = combineReducers({
     token: AccessTokenReducer,
     temp: TempDateReducer,
+    group: GroupsReducer,
 });
 
 const composeEnhancers =
