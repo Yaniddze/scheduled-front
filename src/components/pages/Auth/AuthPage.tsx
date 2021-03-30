@@ -1,5 +1,5 @@
 import { Box, Card, Divider, FormControlLabel, Switch } from "@material-ui/core";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 
 import {
     LoginForm,
@@ -9,15 +9,45 @@ import { RegistrationForm, RegistrationFormType } from "../../ui/auth/registrati
 import { AuthPageContent } from "./styled";
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
+import { useAccessToken, useServer } from '../../../hooks';
+
+import { Login, Register } from '../../../server';
+
 export const LoginPage: FC = () => {
     const [isLogin, setIsLogin] = useState(true);
+    const { setToken } = useAccessToken();
+    const login = useServer(Login);
+    const register = useServer(Register);
+
+    const loading = login.state.fetching || register.state.fetching;
+
+    const loginSuccess = !loading && login.state.answer.succeeded;
+    const registerSuccess = !loading && register.state.answer.succeeded;
+
+    useEffect(() => {
+        if (loginSuccess) {
+            setToken(login.state.answer.data!.token);
+            login.reload();
+        }
+
+        if (registerSuccess) {
+            setToken(register.state.answer.data!.token);
+            register.reload();
+        }
+    }, [loginSuccess, registerSuccess]);
 
     const loginHandle = (data: LoginFormType) => {
-
+        login.fetch({
+            username: data.login,
+            password: data.password,
+        });
     }
 
     const registerHandle = (data: RegistrationFormType) => {
-
+        register.fetch({
+            username: data.login,
+            password: data.password,
+        })
     }
 
     const formToggleHandle = (_: React.ChangeEvent<HTMLInputElement>, isLogin: boolean) => setIsLogin(isLogin);
@@ -32,7 +62,7 @@ export const LoginPage: FC = () => {
                 >
                     {isLogin ?
                         <LoginForm onSubmit={loginHandle} /> :
-                        <RegistrationForm onSubmit={loginHandle} />
+                        <RegistrationForm onSubmit={registerHandle} />
                     }
                 </CSSTransition>
             </SwitchTransition>
