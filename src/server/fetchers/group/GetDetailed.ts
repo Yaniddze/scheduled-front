@@ -22,5 +22,5 @@ export type Subject = {
     teacher: string
 }
 
-export const GetDetailedGroup: FetchFunc<Request, Response> = (client, request) =>
+export const GetDetailedGroup: FetchFunc<Request, DetailedGroup> = (client, request) =>
   client.post('/group/detailed', request);

@@ -15,7 +15,12 @@ import { Login, Register } from '../../../server';
 
 export const LoginPage: FC = () => {
     const [isLogin, setIsLogin] = useState(true);
+
+    const [loginError, setLoginError] = useState('');
+    const [registerError, setRegisterError] = useState('');
+
     const { setToken } = useAccessToken();
+
     const login = useServer(Login);
     const register = useServer(Register);
 
@@ -23,6 +28,16 @@ export const LoginPage: FC = () => {
 
     const loginSuccess = !loading && login.state.answer.succeeded;
     const registerSuccess = !loading && register.state.answer.succeeded;
+
+    if (!login.state.answer.succeeded && !loading && login.state.answer.errorMessage) {
+        setLoginError(login.state.answer.errorMessage);
+        login.reload();
+    }
+
+    if (!register.state.answer.succeeded && !loading && register.state.answer.errorMessage) {
+        setRegisterError(register.state.answer.errorMessage);
+        register.reload();
+    }
 
     useEffect(() => {
         if (loginSuccess) {
@@ -41,16 +56,27 @@ export const LoginPage: FC = () => {
             username: data.login,
             password: data.password,
         });
+
+        setLoginError('');
     }
 
     const registerHandle = (data: RegistrationFormType) => {
         register.fetch({
             username: data.login,
             password: data.password,
-        })
+        });
+
+        setRegisterError('');
     }
 
-    const formToggleHandle = (_: React.ChangeEvent<HTMLInputElement>, isLogin: boolean) => setIsLogin(isLogin);
+    const formToggleHandle = (_: React.ChangeEvent<HTMLInputElement>, isLogin: boolean) => {
+        setIsLogin(isLogin);
+
+        setRegisterError('');
+
+        setLoginError('');
+
+    };
 
     return (
         <AuthPageContent>
@@ -61,8 +87,8 @@ export const LoginPage: FC = () => {
                     classNames='fade'
                 >
                     {isLogin ?
-                        <LoginForm onSubmit={loginHandle} /> :
-                        <RegistrationForm onSubmit={registerHandle} />
+                        <LoginForm onSubmit={loginHandle} error={loginError} /> :
+                        <RegistrationForm onSubmit={registerHandle} error={registerError} />
                     }
                 </CSSTransition>
             </SwitchTransition>
