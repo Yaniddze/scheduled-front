@@ -1,23 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Group } from '../../../../models/Group';
 import { GroupCard } from '../../../ui/Group';
 import { GroupPageContent } from './styled';
 import { GroupsSceleton } from '../../../ui/sceletons/Groups/Groups';
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router';
+import { GetGroups } from '../../../../server';
+import { useServer } from '../../../../hooks';
 
 
 type GroupsPageProps = {}
 
-const groupMock = Array.from({ length: 24 }).map((_, idx) => new Group(idx + 1, `ПС ${idx + 1}`));
-
 export const GroupsPage: React.FC<GroupsPageProps> = (props) => {
-  const [groups, setGroups] = useState<Group[]>(groupMock);
-  const [loading, setLoading] = useState(false);
+  const [groups, setGroups] = useState<Group[]>([]);
   const appHistory = useHistory();
 
+  const groupsRequest = useServer(GetGroups);
+  const groupsLoading = groupsRequest.state.fetching;
+  const groupsSuccess = !groupsLoading && groupsRequest.state.answer.succeeded;
+
+  const loading = groupsLoading;
+
+
+  useEffect(() => {
+    groupsRequest.fetch(undefined);
+  }, []);
+
+  if(groupsSuccess) {
+    setGroups(groupsRequest.state.answer.data as Group[]);
+
+    groupsRequest.reload();
+  }
+
+
   if (loading) return (
-    <GroupsSceleton count={12} />
+    <GroupsSceleton count={6} />
   );
 
   return (
@@ -29,14 +46,14 @@ export const GroupsPage: React.FC<GroupsPageProps> = (props) => {
       }}>
         Войти
       </Button>
-      <Button 
-      variant="contained" 
-       onClick={() => {
-        appHistory.push('/schedule/create');
-      }}
-      classes={{
-        root: '--red-button'
-      }}>
+      <Button
+        variant="contained"
+        onClick={() => {
+          appHistory.push('/schedule/create');
+        }}
+        classes={{
+          root: '--red-button'
+        }}>
         Создать
       </Button>
     </GroupPageContent>

@@ -1,9 +1,5 @@
 import { FetchFunc } from '../../types';
-
-export type Group = {
-  id: number
-  name: string
-};
+import { Group } from '../../../models';
 
 export const GetGroups: FetchFunc<undefined, Group[]> = (client) =>
   client.get('/group');

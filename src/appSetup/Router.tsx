@@ -18,13 +18,13 @@ type AppRoutesPropTypes = {
 export const AppRoutes: FC<AppRoutesPropTypes> = () => (
   <Switch>
 
-    <Route path="/" exact>
+    {/* <Route path="/" exact>
       <ApplicationSecure>
         <div>
           main
         </div>
       </ApplicationSecure>
-    </Route>
+    </Route> */}
 
     <Route path="/schedule" exact>
       <ApplicationSecure>
@@ -69,7 +69,7 @@ export const AppRoutes: FC<AppRoutesPropTypes> = () => (
     </Route>
 
 
-    <Redirect to="/" />
+    <Redirect to="/schedule" />
   </Switch>
 );
 
