@@ -1,4 +1,5 @@
 import { DefaultTheme } from 'styled-components';
+import { LightLeyoutPalleteColor } from './Colors';
 
 export const lightTheme: DefaultTheme = {
   colors: {
@@ -33,7 +34,9 @@ export const lightTheme: DefaultTheme = {
       color: '#000',
       contrast: '#000'
     },
-    palette: {}
+    palette: {
+      layout: LightLeyoutPalleteColor
+    }
   },
 
 };

@@ -27,7 +27,17 @@ export const GroupsPage: React.FC<GroupsPageProps> = (props) => {
       <Button variant="contained" color="primary" onClick={() => {
         appHistory.push('/schedule/add');
       }}>
-        войти
+        Войти
+      </Button>
+      <Button 
+      variant="contained" 
+       onClick={() => {
+        appHistory.push('/schedule/create');
+      }}
+      classes={{
+        root: '--red-button'
+      }}>
+        Создать
       </Button>
     </GroupPageContent>
   );

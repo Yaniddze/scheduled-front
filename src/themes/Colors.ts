@@ -25,3 +25,9 @@ export const DarkLeyoutPalleteColor: PalleteColor = {
   100: {color: '#cfd8dc', textColor: '#333'},
   900: {color: '#263238', textColor: '#fff'}
 }
+export const LightLeyoutPalleteColor: PalleteColor = {
+  contrast: {color: '#263238', textColor: '#fff'},
+  main: {color: '#78909c', textColor: '#fff'},
+  100: {color: '#cfd8dc', textColor: '#333'},
+  900: {color: '#263238', textColor: '#fff'}
+}
