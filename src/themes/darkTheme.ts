@@ -1,14 +1,15 @@
 import { DefaultTheme } from 'styled-components';
+import { DarkLeyoutPalleteColor } from './Colors';
 
 export const darkTheme: DefaultTheme = {
   colors: {
     main: {
       color: '#62E200',
-      contrast: 'black'
+      contrast: '#000'
     },
     secondary: {
       color: '#62AA2A',
-      contrast: 'black'
+      contrast: '#000'
     },
     background: {
       header: {
@@ -26,12 +27,15 @@ export const darkTheme: DefaultTheme = {
     },
     calcDarkInRgba: ((opacity: number): string => `rgba(64,147,0,${opacity})`),
     error: {
-      color: 'red',
-      contrast: 'black'
+      color: '#f00',
+      contrast: '#000'
     },
     linkColor: {
-      color: 'black',
-      contrast: 'black'
+      color: '#000',
+      contrast: '#000'
     },
+    palette: {
+      layout: DarkLeyoutPalleteColor
+    }
   }
 };

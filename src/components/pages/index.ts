@@ -1,1 +1,2 @@
-export * from './Auth/AuthPage';
+export * from './Auth';
+export * from './Schedule';

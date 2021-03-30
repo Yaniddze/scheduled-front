@@ -5,3 +5,5 @@ export * from './button';
 export * from './container';
 export * from './main';
 export * from './auth/loginForm';
+export * from './Group';
+export * from './Lesson';

@@ -1,9 +1,5 @@
 import 'styled-components';
-
-type Color = {
-  color: string
-  contrast: string
-}
+import { PalleteColor } from './themes/Colors';
 
 declare module 'styled-components' {
   export interface DefaultTheme {
@@ -18,6 +14,10 @@ declare module 'styled-components' {
       calcDarkInRgba: (opacity: number) => string
       error: Color
       linkColor: Color
+
+      palette: {
+        [k: string]: PalleteColor
+      }
     };
   }
 }
