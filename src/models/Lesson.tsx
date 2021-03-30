@@ -17,4 +17,5 @@ export class Lesson {
 export type LessonAutoCompleate = {
   name: string
   id: number
+  teacherName: string
 }
