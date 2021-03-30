@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useSelector } from 'react-redux';
 import { Lesson, LessonAutoCompleate } from '../../../../models/Lesson';
@@ -7,29 +7,20 @@ import { LessonField } from './styled';
 import { LessonAdd } from '../../../ui/Lesson/LessonAdd';
 import { RootState } from '../../../../reduxStore';
 
+import { GetSubjects } from '../../../../server';
 
+import { useServer } from '../../../../hooks';
 
 type SheduleDayParams = {
   id: string
   day: string
 }
-type SheduleDayProps = {}
 
-const lessonsList: Lesson[] = [
-  new Lesson('физ-ра', 'Лопухина', new Date(2021, 3, 30, 12, 30, 0, 0), 90, 1),
-  new Lesson('Математика', 'Лопухина', new Date(2021, 3, 30, 14, 0, 0, 0), 90, 2),
-  new Lesson('физ-ра', 'Жениховыч', new Date(2021, 3, 30, 15, 30, 0, 0), 90, 3),
-];
-
-const Lessons: LessonAutoCompleate[] = [
-  { name: 'физ-ра', id: 1 },
-  { name: 'Математика', id: 2 },
-  { name: 'Физика', id: 3 },
-];
-
-export const SheduleDayPage: React.FC<SheduleDayProps> = (props) => {
+export const SheduleDayPage: React.FC = (props) => {
   const pageParms = useParams<SheduleDayParams>();
   const id = pageParms.id;
+
+  const subjs = useServer(GetSubjects);
 
   const tempDate = useSelector((store: RootState) => store.temp);
   const group = useSelector((store: RootState) => store.group.find(x => x.id === Number(id)));
@@ -40,6 +31,23 @@ export const SheduleDayPage: React.FC<SheduleDayProps> = (props) => {
   const task = group?.tasks.find(x => x.date === day);
 
   const [lessons, setLessons] = useState<Lesson[]>(task?.subjects.map(x => new Lesson(x.subjectName, x.teacher, new Date(task.date), x.durationInMinutes, x.id)) || []);
+
+  const [lessonsAuto, setLessonsAuto] = useState<LessonAutoCompleate[]>([]);
+
+  useEffect(() => {
+    subjs.fetch(undefined);
+  }, []);
+
+  const loading = subjs.state.fetching;
+  const success = !loading && subjs.state.answer.succeeded;
+
+  useEffect(() => {
+    if (success) {
+      setLessonsAuto(subjs.state.answer.data!);
+
+      subjs.reload();
+    }
+  }, [success]);
 
   const deleteHandle = (lessonId: number) => {
     setLessons(lessons.filter((lesson) => lesson.id != lessonId));
@@ -71,7 +79,7 @@ export const SheduleDayPage: React.FC<SheduleDayProps> = (props) => {
 
       {/* add new lesson */}
       { isOwner &&
-        <LessonAdd lessons={Lessons} onAdd={addHandle} />
+        <LessonAdd lessons={lessonsAuto} onAdd={addHandle} />
       }
 
     </LessonField>
