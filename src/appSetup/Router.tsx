@@ -3,7 +3,7 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 
 import {
   EnterGroupPage,
-  LoginPage, SchedulePage, SheduleDayPage
+  LoginPage, SchedulePage, SheduleDayPage, CreateGroupePage, AccountPage
 } from '../components';
 import { GroupsPage } from "../components/pages/Schedule/GroupsPage";
 
@@ -21,40 +21,53 @@ export const AppRoutes: FC<AppRoutesPropTypes> = () => (
     <Route path="/" exact>
       <ApplicationSecure>
         <div>
-          123123
+          main
         </div>
       </ApplicationSecure>
     </Route>
 
     <Route path="/schedule" exact>
-      {/* <LoginSecure> */}
+      <ApplicationSecure>
         <GroupsPage />
-      {/* </LoginSecure> */}
+      </ApplicationSecure>
     </Route>
 
-    <Route path="/schedule/add" exact>
-      {/* <LoginSecure> */}
-        <EnterGroupPage />
-      {/* </LoginSecure> */}
+    <Route path="/account" exact>
+      <ApplicationSecure>
+        <AccountPage />
+      </ApplicationSecure>
     </Route>
-
-    <Route path="/schedule/:id" exact>
-      {/* <LoginSecure> */}
-        <SchedulePage />
-      {/* </LoginSecure> */}
-    </Route>
-
-    <Route path="/schedule/:id/:day" exact>
-      {/* <LoginSecure> */}
-        <SheduleDayPage />
-      {/* </LoginSecure> */}
-    </Route>
-
+    
     <Route path="/login" exact>
       <LoginSecure>
         <LoginPage />
       </LoginSecure>
     </Route>
+
+    <Route path="/schedule/add" exact>
+      <ApplicationSecure>
+        <EnterGroupPage />
+      </ApplicationSecure>
+    </Route>
+
+    <Route path="/schedule/create" exact>
+      <ApplicationSecure>
+        <CreateGroupePage />
+      </ApplicationSecure>
+    </Route>
+
+    <Route path="/schedule/:id" exact>
+      <ApplicationSecure>
+        <SchedulePage />
+      </ApplicationSecure>
+    </Route>
+
+    <Route path="/schedule/:id/:day" exact>
+      <ApplicationSecure>
+        <SheduleDayPage />
+      </ApplicationSecure>
+    </Route>
+
 
     <Redirect to="/" />
   </Switch>

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
-import { Box, Button, CircularProgress } from '@material-ui/core';
-import { AppCard } from '../../../ui/layout/AppCard/AppCard';
-import { useHistory } from 'react-router';
+import { Box, Button, CircularProgress, TextField } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import { AppCard } from '../../../ui/layout';
 
-type EnterGroupPageProps = {}
+type CreateGroupePageProps = {}
 
-export const EnterGroupPage: React.FC<EnterGroupPageProps> = (props) => {
+export const CreateGroupePage: React.FC<CreateGroupePageProps> = (props) => {
   const [group, setGroup] = useState('');
   const [error, setError] = useState(false);
   const appHistory = useHistory();
@@ -27,12 +26,11 @@ export const EnterGroupPage: React.FC<EnterGroupPageProps> = (props) => {
 
   return (
     <AppCard>
-      <h3>Вход в группу</h3>
+      <h3>Создание группы</h3>
 
       {loading &&
-        <> 
+        <>
           <CircularProgress color="primary" />
-          <Skeleton variant="rect" width="100%" height={125} animation="wave" />
         </>
       }
 
