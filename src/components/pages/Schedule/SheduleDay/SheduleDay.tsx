@@ -4,6 +4,8 @@ import { Lesson, LessonAutoCompleate } from '../../../../models/Lesson';
 import { LessonEditableCard } from '../../../ui';
 import { LessonField } from './styled';
 import { LessonAdd } from '../../../ui/Lesson/LessonAdd';
+import { useServer } from '../../../../hooks';
+import { CreateScheduled, DeleteScheduled } from '../../../../server';
 
 
 
@@ -33,12 +35,44 @@ export const SheduleDayPage: React.FC<SheduleDayProps> = (props) => {
   const isOwner = true;
   const [lessons, setLessons] = useState<Lesson[]>(lessonsList);
 
+  const deleteRequest = useServer(DeleteScheduled);
+  const createRequest = useServer(CreateScheduled);
+
+  const deleteLoading = deleteRequest.state.fetching;
+  const deleteSuccess = !deleteLoading && deleteRequest.state.answer.succeeded;
+  const createLoading = createRequest.state.fetching;
+  const createSuccess = !createLoading && createRequest.state.answer.succeeded;
+
+  const loading = deleteLoading || createLoading;
+
   const deleteHandle = (lessonId: number) => {
+    // delete
     setLessons(lessons.filter((lesson) => lesson.id != lessonId));
+
+    deleteRequest.fetch({
+      scheduleId: lessonId
+    });
   }
 
   const addHandle = (time: Date, lesson: LessonAutoCompleate) => {
+    // add
     setLessons(lessons.concat(new Lesson(lesson.name, 'From server', time, 90, lessons.length + 1)));
+
+    createRequest.fetch({
+      groupId: Number(id),
+      durationInMinutes: 90,
+      startDate: time,
+      subjectId: lesson.id
+    });
+  }
+
+
+  if(deleteSuccess) {
+    deleteRequest.reload();
+  }
+
+  if(createSuccess) {
+    createRequest.reload();
   }
 
 
