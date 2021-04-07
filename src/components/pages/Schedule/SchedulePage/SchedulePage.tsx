@@ -26,10 +26,7 @@ type SchedulePageProps = {}
 export const SchedulePage: React.FC<SchedulePageProps> = (props) => {
   const id = useParams<SchedulePageParams>().id;
   const [group, setGroup] = useState<DetailedGroup>();
-  const [open, setOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const detailed = useServer(GetDetailedGroup);
@@ -61,43 +58,7 @@ export const SchedulePage: React.FC<SchedulePageProps> = (props) => {
   return (
     <div>
       {toShow}
-      <div>
-        {open && (
-          <div>
-            <div>
-              <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
-                <DatePicker
-                  color="primary"
-                  label="выбирите время"
-                  value={selectedDate}
-                  onChange={(date) => setSelectedDate(date as any)}
-                  fullWidth
-                />
-              </MuiPickersUtilsProvider>
-            </div>
-            <div>
-              <IconButton 
-                color="primary"
-                onClick={() => {
-                  if (selectedDate) {
-                    dispatch(SetTemp(selectedDate));
-                    history.push(`/schedule/${id}/temp`);
-                  }
-                }}
-              >
-                <Check />
-              </IconButton>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div style={{ marginTop: 20 }}>
-        <Button onClick={() => setOpen(old => !old)}>
-          {open ? 'Скрыть' : 'Добавить'}
-        </Button>
-      </div>
-
+      {toShow?.length === 0 ? 'Предметов нет' : ''}
     </div>
   );
 };

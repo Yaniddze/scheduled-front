@@ -1,4 +1,4 @@
-import { IconButton } from '@material-ui/core';
+import { duration, IconButton } from '@material-ui/core';
 import React from 'react';
 import { Lesson } from '../../../../models/Lesson';
 import { LessonItem } from './styled';
@@ -13,9 +13,12 @@ type LessonEditableCardProps = {
 
 export const LessonEditableCard: React.FC<LessonEditableCardProps> = ({
   lesson,
-  isOwner,
-  deleteClick
 }) => {
+
+  const durationTime = new Date(lesson.time);
+
+  durationTime.setMinutes(durationTime.getMinutes() + lesson.duration);
+
   return (
     <LessonItem>
       <div>
@@ -25,17 +28,12 @@ export const LessonEditableCard: React.FC<LessonEditableCardProps> = ({
           <span>{lesson.time.toLocaleTimeString('ru-RU', {
             hour: '2-digit',
             minute: '2-digit'
+          })} - {durationTime.toLocaleTimeString('ru-RU', {
+            hour: '2-digit',
+            minute: '2-digit'
           })}</span>
         </div>
       </div>
-
-      { isOwner &&
-        <div>
-          <IconButton aria-label="delete" onClick={deleteClick}>
-            <DeleteIcon color="action" classes={{root: 'delete-icon'}} />
-          </IconButton>
-        </div>
-      }
     </LessonItem>
   );
 };

@@ -110,11 +110,6 @@ export const SheduleDayPage: React.FC = (props) => {
         />
       ))}
 
-      {/* add new lesson */}
-      { isOwner &&
-        <LessonAdd startDate={tempDate} lessons={lessonsAuto} onAdd={addHandle} />
-      }
-
     </LessonField>
   );
 };
