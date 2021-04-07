@@ -1,14 +1,10 @@
-import { duration, IconButton } from '@material-ui/core';
 import React from 'react';
 import { Lesson } from '../../../../models/Lesson';
 import { LessonItem } from './styled';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 type LessonEditableCardProps = {
   lesson: Lesson
   isOwner: boolean
-
-  deleteClick: (event?: React.MouseEvent) => void
 }
 
 export const LessonEditableCard: React.FC<LessonEditableCardProps> = ({
