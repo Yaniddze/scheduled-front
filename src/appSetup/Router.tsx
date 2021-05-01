@@ -2,8 +2,7 @@ import { FC } from "react";
 import { Switch, Redirect, Route } from 'react-router-dom';
 
 import {
-  EnterGroupPage,
-  LoginPage, SchedulePage, SheduleDayPage, CreateGroupePage, AccountPage
+  LoginPage, SchedulePage, SheduleDayPage, AccountPage
 } from '../components';
 import { GroupsPage } from "../components/pages/Schedule/GroupsPage";
 
@@ -42,18 +41,6 @@ export const AppRoutes: FC<AppRoutesPropTypes> = () => (
       <LoginSecure>
         <LoginPage />
       </LoginSecure>
-    </Route>
-
-    <Route path="/schedule/add" exact>
-      <ApplicationSecure>
-        <EnterGroupPage />
-      </ApplicationSecure>
-    </Route>
-
-    <Route path="/schedule/create" exact>
-      <ApplicationSecure>
-        <CreateGroupePage />
-      </ApplicationSecure>
     </Route>
 
     <Route path="/schedule/:id" exact>

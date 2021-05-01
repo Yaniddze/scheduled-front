@@ -40,12 +40,6 @@ export const GroupsPage: React.FC<GroupsPageProps> = (props) => {
   return (
     <GroupPageContent>
       {groups.map((el) => <GroupCard to={`/schedule/${el.id}`} key={el.id} group={el} />)}
-
-      <Button variant="contained" color="primary" onClick={() => {
-        appHistory.push('/schedule/add');
-      }}>
-        Войти в группу
-      </Button>
     </GroupPageContent>
   );
 };
