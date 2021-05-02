@@ -4,10 +4,9 @@ import { LessonItem } from './styled';
 
 type LessonEditableCardProps = {
   lesson: Lesson
-  isOwner: boolean
 }
 
-export const LessonEditableCard: React.FC<LessonEditableCardProps> = ({
+export const LessonCard: React.FC<LessonEditableCardProps> = ({
   lesson,
 }) => {
 

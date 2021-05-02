@@ -1,2 +1,3 @@
 export * from './useAccessToken';
-export * from './useServer';
+export * from './useServerQuery';
+export * from './useServerMutation';

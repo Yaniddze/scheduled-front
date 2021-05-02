@@ -9,73 +9,53 @@ import { RegistrationForm, RegistrationFormType } from "../../ui/auth/registrati
 import { AuthPageContent } from "./styled";
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
-import { useAccessToken, useServer } from '../../../hooks';
+import { useAccessToken, useServerMutation } from '../../../hooks';
 
 import { Login, Register } from '../../../server';
 
 export const LoginPage: FC = () => {
     const [isLogin, setIsLogin] = useState(true);
 
-    const [loginError, setLoginError] = useState('');
-    const [registerError, setRegisterError] = useState('');
-
     const { setToken } = useAccessToken();
 
-    const login = useServer(Login);
-    const register = useServer(Register);
+    const { 
+        mutate: login, 
+        data: loginData, 
+        isLoading: loginLoading,
+        error: loginError,
+    } = useServerMutation('login', Login);
 
-    const loading = login.state.fetching || register.state.fetching;
+    const { 
+        mutate: register, 
+        data: registerData, 
+        isLoading: registerLoading,
+        error: registerError,
+    } = useServerMutation('register', Register);
 
-    const loginSuccess = !loading && login.state.answer.succeeded;
-    const registerSuccess = !loading && register.state.answer.succeeded;
-
-    if (!login.state.answer.succeeded && !loading && login.state.answer.errorMessage) {
-        setLoginError(login.state.answer.errorMessage);
-        login.reload();
+    if (loginData?.token) {
+        setToken(loginData.token);
     }
 
-    if (!register.state.answer.succeeded && !loading && register.state.answer.errorMessage) {
-        setRegisterError(register.state.answer.errorMessage);
-        register.reload();
+    if (registerData?.token) {
+        setToken(registerData.token);
     }
-
-    useEffect(() => {
-        if (loginSuccess) {
-            setToken(login.state.answer.data!.token);
-            login.reload();
-        }
-
-        if (registerSuccess) {
-            setToken(register.state.answer.data!.token);
-            register.reload();
-        }
-    }, [loginSuccess, registerSuccess]);
 
     const loginHandle = (data: LoginFormType) => {
-        login.fetch({
+        login({
             username: data.login,
             password: data.password,
         });
-
-        setLoginError('');
     }
 
     const registerHandle = (data: RegistrationFormType) => {
-        register.fetch({
+        register({
             username: data.login,
             password: data.password,
         });
-
-        setRegisterError('');
     }
 
     const formToggleHandle = (_: React.ChangeEvent<HTMLInputElement>, isLogin: boolean) => {
         setIsLogin(isLogin);
-
-        setRegisterError('');
-
-        setLoginError('');
-
     };
 
     return (
@@ -87,8 +67,8 @@ export const LoginPage: FC = () => {
                     classNames='fade'
                 >
                     {isLogin ?
-                        <LoginForm onSubmit={loginHandle} error={loginError} /> :
-                        <RegistrationForm onSubmit={registerHandle} error={registerError} />
+                        <LoginForm onSubmit={loginHandle} error={loginError?.message || ''} /> :
+                        <RegistrationForm onSubmit={registerHandle} error={registerError?.message || ''} />
                     }
                 </CSSTransition>
             </SwitchTransition>

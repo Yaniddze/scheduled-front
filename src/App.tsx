@@ -6,6 +6,7 @@ import {
   ReduxState,
   AppRoutes,
   AppTheme,
+  QueryContext,
 } from './appSetup';
 
 import {
@@ -17,18 +18,20 @@ import {
 export const App: FC = () => {
   return (
     <BrowserRouter>
-      <ReduxState>
-        <AppTheme>
-          <div id="app"> 
-            <Navbar />
-            <Main>
-              <AppRoutes />
-            </Main>
-            <Footer />
-          </div>
-        </AppTheme>
-        <GlobalStyles />
-      </ReduxState>
+      <QueryContext>
+        <ReduxState>
+          <AppTheme>
+            <div id="app"> 
+              <Navbar />
+              <Main>
+                <AppRoutes />
+              </Main>
+              <Footer />
+            </div>
+          </AppTheme>
+          <GlobalStyles />
+        </ReduxState>
+      </QueryContext>
     </BrowserRouter>
   );
 }

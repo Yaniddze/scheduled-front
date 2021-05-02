@@ -1,45 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { Group } from '../../../../models/Group';
+import React, { FC } from 'react';
 import { GroupCard } from '../../../ui/Group';
 import { GroupPageContent } from './styled';
 import { GroupsSceleton } from '../../../ui/sceletons/Groups/Groups';
-import { Button } from '@material-ui/core';
-import { useHistory } from 'react-router';
 import { GetGroups } from '../../../../server';
-import { useServer } from '../../../../hooks';
+import { useServerQuery } from '../../../../hooks';
 
+export const GroupsPage: FC = () => {
+  const { data, isFetching } = useServerQuery('groups', GetGroups, undefined);
 
-type GroupsPageProps = {}
-
-export const GroupsPage: React.FC<GroupsPageProps> = (props) => {
-  const [groups, setGroups] = useState<Group[]>([]);
-  const appHistory = useHistory();
-
-  const groupsRequest = useServer(GetGroups);
-  const groupsLoading = groupsRequest.state.fetching;
-  const groupsSuccess = !groupsLoading && groupsRequest.state.answer.succeeded;
-
-  const loading = groupsLoading;
-
-
-  useEffect(() => {
-    groupsRequest.fetch(undefined);
-  }, []);
-
-  if(groupsSuccess) {
-    setGroups(groupsRequest.state.answer.data as Group[]);
-
-    groupsRequest.reload();
-  }
-
-
-  if (loading) return (
+  if (isFetching) return (
     <GroupsSceleton count={6} />
   );
 
   return (
     <GroupPageContent>
-      {groups.map((el) => <GroupCard to={`/schedule/${el.id}`} key={el.id} group={el} />)}
+      {data?.map((el) => <GroupCard to={`/schedule/${el.id}`} key={el.id} group={el} />)}
     </GroupPageContent>
   );
 };
